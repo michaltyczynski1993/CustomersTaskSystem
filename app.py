@@ -8,12 +8,15 @@ auth = HTTPBasicAuth()
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 users = {
     "mtyczynski": generate_password_hash("Lolek1200!")
 }
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
+    description = db.Column(db.String(200))
+    category = db.Column(db.String(20))
     complete = db.Column(db.Boolean)
 
 @app.route("/")
@@ -44,10 +47,28 @@ def todo():
 def add():
     # add new item
     title = request.form.get('title')
-    new_todo = Todo(title=title, complete=False)
+    description = request.form.get('description')
+    category = request.form.get('category')
+    new_todo = Todo(title=title, description=description, category=category, complete=False)
     db.session.add(new_todo)
     db.session.commit()
-    return redirect(url_for('index'))
+    return redirect(url_for('todo'))
+
+@app.route("/update/<int:todo_id>")
+def update(todo_id):
+    # add new item
+    todo = Todo.query.filter_by(id=todo_id).first()
+    todo.complete = not todo.complete
+    db.session.commit()
+    return redirect(url_for('todo'))
+
+@app.route("/delete/<int:todo_id>")
+def delete(todo_id):
+    # add new item
+    todo = Todo.query.filter_by(id=todo_id).first()
+    db.session.delete(todo)
+    db.session.commit()
+    return redirect(url_for('todo'))
 
 if __name__ == "__main__":
     db.create_all()

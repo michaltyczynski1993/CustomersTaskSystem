@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title%}Customer's Task System - Home{% endblock %}
+{% block title%}Customer's Task System - TODO{% endblock %}
 
 {% block main %}
 <div class="container">
@@ -15,36 +15,98 @@
   </div>
 </div>
 <div class="container">
-  <form>
+
+  <form action="/add" method="post">
+
     <div class="mb-2">
       <label for="todo-title" class="form-label">Todo Title</label>
       <input type="text" class="form-control" id="todo-title" name="title" placeholder="Type TODO title here...">
     </div>
+
     <div class="mb-2">
       <label for="task-description" class="form-label">Description</label>
-      <input type="text" class="form-control" id="task-description">
+      <textarea class="form-control" name="description" id="task-description" rows="3"
+        placeholder="Wite task description here..."></textarea>
     </div>
 
     <div class="container">
       <div class="row">
-        
+
         <div class="col-2">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">Serwis</label>
+            <input class="form-check-input" type="radio" name="category" id="service-radio" value="Serwis">
+            <label class="form-check-label" for="service-radio">Serwis</label>
           </div>
         </div>
 
         <div class="col-2">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">Oferta</label>
+            <input class="form-check-input" type="radio" name="category" id="offer-radio" value="Oferta">
+            <label class="form-check-label" for="offer-radio">Oferta</label>
           </div>
         </div>
-      
+
+        <div class="col-2">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="category" id="calculation" value="Kalkulacja">
+            <label class="form-check-label" for="calculation">Kalkulacja</label>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="category" id="agreement-id" value="Umowa">
+            <label class="form-check-label" for="agreement-id">Umowa</label>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="category" id="agreement-id" value="Płatności">
+            <label class="form-check-label" for="agreement-id">Płatności</label>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="category" id="agreement-id" value="Akwizycja">
+            <label class="form-check-label" for="agreement-id">Akwizycja</label>
+          </div>
+        </div>
+
       </div>
     </div>
+
     <button type="submit" class="btn btn-primary">Add TODO</button>
+    <hr>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          {% for todo in todo_list %}
+          <div class="container p-5 my-5 border">
+            <div class="row">
+              <div class="col">
+                <p>{{todo.id}} | {{todo.title}}</p>
+                <p>{{todo.category}}</p>
+                <p>{{todo.description}}</p>
+                {% if todo.complete == False %}
+                <span class="ui grey label">Not Complete</span>
+                {% else %}
+                <span class="ui green label">Completed</span>
+                {% endif %}
+                <a class="ui blue button" href="/update/{{todo.id}}">Update</a>
+                <a class="ui red button" href="/delete/{{todo.id}}">Delete</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+
+
   </form>
 </div>
 
