@@ -5,12 +5,11 @@
 {% block main %}
 <div class="container">
   <div class="row">
-    <div class="mt-5 col">
+    <div class="mt-2 col">
       {% for key in username.keys()%}
       <h1>Hello {{ key}}</h1>
       {% endfor %}
       <hr>
-      <p> Content wil be visible here soon... </p>
     </div>
   </div>
 </div>
@@ -30,50 +29,51 @@
     </div>
 
     <div class="container">
-      <div class="row">
-
-        <div class="col-2">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="category" id="service-radio" value="Serwis">
-            <label class="form-check-label" for="service-radio">Serwis</label>
+      <div class="mb-2">
+        <div class="row">
+          <div class="col-4">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="category" id="service-radio" value="Serwis">
+              <label class="form-check-label" for="service-radio">Serwis</label>
+            </div>
           </div>
-        </div>
 
-        <div class="col-2">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="category" id="offer-radio" value="Oferta">
-            <label class="form-check-label" for="offer-radio">Oferta</label>
+          <div class="col-4">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="category" id="offer-radio" value="Oferta">
+              <label class="form-check-label" for="offer-radio">Oferta</label>
+            </div>
           </div>
-        </div>
 
-        <div class="col-2">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="category" id="calculation" value="Kalkulacja">
-            <label class="form-check-label" for="calculation">Kalkulacja</label>
+          <div class="col-4">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="category" id="calculation" value="Kalkulacja">
+              <label class="form-check-label" for="calculation">Kalkulacja</label>
+            </div>
           </div>
-        </div>
 
-        <div class="col-2">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="category" id="agreement-id" value="Umowa">
-            <label class="form-check-label" for="agreement-id">Umowa</label>
+          <div class="col-4">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="category" id="agreement-id" value="Umowa">
+              <label class="form-check-label" for="agreement-id">Umowa</label>
+            </div>
           </div>
-        </div>
 
-        <div class="col-2">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="category" id="agreement-id" value="Płatności">
-            <label class="form-check-label" for="agreement-id">Płatności</label>
+          <div class="col-4">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="category" id="agreement-id" value="Płatności">
+              <label class="form-check-label" for="agreement-id">Płatności</label>
+            </div>
           </div>
-        </div>
 
-        <div class="col-2">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="category" id="agreement-id" value="Akwizycja">
-            <label class="form-check-label" for="agreement-id">Akwizycja</label>
+          <div class="col-4">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="category" id="agreement-id" value="Akwizycja">
+              <label class="form-check-label" for="agreement-id">Akwizycja</label>
+            </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
 
@@ -87,16 +87,18 @@
           <div class="container p-5 my-5 border">
             <div class="row">
               <div class="col">
-                <p>{{todo.id}} | {{todo.title}}</p>
-                <p>{{todo.category}}</p>
+                <p>{{todo.id}} | {{todo.title}} | {{todo.category}} |
+                  {% if todo.complete == False %}
+                  <span class="badge badge-secondary">Not Complete</span>
+                  {% else %}
+                  <span class="badge badge-success">Completed</span>
+                  {% endif %}
+                </p>
+                <hr>
                 <p>{{todo.description}}</p>
-                {% if todo.complete == False %}
-                <span class="ui grey label">Not Complete</span>
-                {% else %}
-                <span class="ui green label">Completed</span>
-                {% endif %}
-                <a class="ui blue button" href="/update/{{todo.id}}">Update</a>
-                <a class="ui red button" href="/delete/{{todo.id}}">Delete</a>
+
+                <a class="btn btn-primary" href="/update/{{todo.id}}">Update</a>
+                <a class="btn btn-danger" href="/delete/{{todo.id}}">Delete</a>
               </div>
             </div>
           </div>
