@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
@@ -72,4 +73,5 @@ def delete(todo_id):
 
 if __name__ == "__main__":
     db.create_all()
-    app.run()
+    port = os.environ.get("PORT", 5000)
+    app.run(debug=False, host='0.0.0.0', port=port)
