@@ -87,7 +87,8 @@
           <div class="container p-5 my-5 border">
             <div class="row">
               <div class="col">
-                <p>{{todo.id}} | {{todo.title}} | {{todo.category}} |
+                <p>{{todo.id}} | {{todo.title}} | 
+                  <span class="badge badge-info">{{todo.category}}</span> |
                   {% if todo.complete == False %}
                   <span class="badge badge-secondary">Not Complete</span>
                   {% else %}
