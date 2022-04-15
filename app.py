@@ -72,6 +72,10 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for('todo'))
 
+
+def create_tables():
+    db.create_all()
+    
 if __name__ == "__main__":
     db.create_all()
     port = os.environ.get("PORT", 5000)
