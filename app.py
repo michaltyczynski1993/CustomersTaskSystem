@@ -1,3 +1,4 @@
+import click
 from flask import Flask, render_template, request, redirect, url_for
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -72,10 +73,10 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for('todo'))
 
-
+@click.command(name='create_tables')
 def create_tables():
     db.create_all()
-    
+
 if __name__ == "__main__":
     db.create_all()
     port = os.environ.get("PORT", 5000)
