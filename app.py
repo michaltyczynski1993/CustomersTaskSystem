@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://vawloyvwmniacp:e780029533fb17e433e94e4a6d3e035872b7e657a4c36f2f2e21745e2451eeb1@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/dfcqvjt7icvel9"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
