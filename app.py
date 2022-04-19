@@ -1,3 +1,4 @@
+from datetime import date
 from flask import Flask, render_template, request, redirect, url_for
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,7 +7,7 @@ import os
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Lolek1200!@localhost/todo'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Lolek1200!@localhost:5432/todo'
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -20,6 +21,7 @@ class Todo(db.Model):
     title = db.Column(db.String(100))
     description = db.Column(db.String(200))
     category = db.Column(db.String(20))
+    date = db.Column(db.DateTime)
     complete = db.Column(db.Boolean)
 
 @app.route("/")
