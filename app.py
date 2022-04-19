@@ -1,4 +1,3 @@
-import click
 from flask import Flask, render_template, request, redirect, url_for
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -7,7 +6,8 @@ import os
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Lolek1200!@localhost/todo'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -73,11 +73,7 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for('todo'))
 
-@click.command(name='create_tables')
-def create_tables():
-    db.create_all()
-
 if __name__ == "__main__":
     db.create_all()
     port = os.environ.get("PORT", 5000)
-    app.run(debug=False, host='0.0.0.0', port=port)
+    app.run(debug=True, host='0.0.0.0', port=port)
