@@ -43,10 +43,12 @@ def verify_password(username, password):
 @app.route("/todo")
 @auth.login_required
 def todo():
+    # today's date
+    today_date = date.today()
     username = users
     todo_list=Todo.query.all()
     print(todo_list)
-    return render_template("todo.html", username=username, todo_list=todo_list)
+    return render_template("todo.html", username=username, todo_list=todo_list, today_date=today_date)
 
 @app.route("/add", methods=['POST'])
 def add():

@@ -93,11 +93,18 @@
               <div class="col">
                 <p>{{todo.id}} | {{todo.title}} | 
                   <span class="badge badge-info">{{todo.category}}</span> |
+                  
                   {% if todo.complete == False %}
                   <span class="badge badge-secondary">Not Complete</span>
                   {% else %}
                   <span class="badge badge-success">Completed</span>
-                  {% endif %} | {{todo.date}}
+                  {% endif %} | 
+                  
+                  {% if todo.date >= today_date%}
+                  <span>{{todo.date}}</span>
+                  {% else %}
+                  <span class="text-danger">{{todo.date}}</span>
+                  {% endif %}
                 </p>
                 <hr>
                 <p>{{todo.description}}</p>
