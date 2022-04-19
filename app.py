@@ -21,7 +21,7 @@ class Todo(db.Model):
     title = db.Column(db.String(100))
     description = db.Column(db.String(200))
     category = db.Column(db.String(20))
-    date = db.Column(db.DateTime)
+    date = db.Column(db.Date)
     complete = db.Column(db.Boolean)
 
 @app.route("/")
