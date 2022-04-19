@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date 
 from flask import Flask, render_template, request, redirect, url_for
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -54,7 +54,8 @@ def add():
     title = request.form.get('title')
     description = request.form.get('description')
     category = request.form.get('category')
-    new_todo = Todo(title=title, description=description, category=category, complete=False)
+    due_date = request.form.get('date')
+    new_todo = Todo(title=title, description=description, category=category, date=due_date, complete=False)
     db.session.add(new_todo)
     db.session.commit()
     return redirect(url_for('todo'))
