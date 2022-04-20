@@ -1,4 +1,5 @@
-from datetime import date 
+from datetime import date
+from unicodedata import category 
 from flask import Flask, render_template, request, redirect, url_for
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -78,6 +79,14 @@ def delete(todo_id):
     db.session.delete(todo)
     db.session.commit()
     return redirect(url_for('todo'))
+
+@app.route("/filter/<string:value>")
+def filter(value):
+    today_date = date.today()
+    username = users
+    todo_list=Todo.query.filter_by(category = value).all()
+    print(todo_list)
+    return render_template("todo.html", username=username, todo_list=todo_list, today_date=today_date)
 
 if __name__ == "__main__":
     db.create_all()

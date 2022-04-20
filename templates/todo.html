@@ -84,23 +84,50 @@
     <button type="submit" class="btn btn-primary">Add TODO</button>
     <hr>
     <div class="container">
-      <div class="row">
-        <div class="col">
+      <div class="row justify-content-start">
+        <div class="col-1">
 
           <div class="dropdown">
-            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sort
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Sort
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownmenu">
-            <h6 class="dropdown-header">Choose elements</h6>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/todo/id">id</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/todo/category">category</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/todo/date">date</a>
+              <h6 class="dropdown-header">Choose element</h6>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/todo/id">id</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/todo/category">category</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/todo/date">date</a>
             </div>
+          </div>
+
+        </div>
+
+        <div class="col-1">
+
+          <div class="dropdown">
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownmenu" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Filter by category
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownmenu">
+              <h6 class="dropdown-header">Choose element</h6>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/filter/{{'Serwis'}}">Serwis</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/filter/{{'Oferta'}}">Oferta</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/filter/{{'Kalkulacja'}}">Kalkulacja</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/filter/{{'Umowa'}}">Umowa</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/filter/{{'Płatności'}}">Płatności</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/filter/{{'Akwizycja'}}">Akwizycja</a>
             </div>
+          </div>
 
         </div>
       </div>
@@ -112,15 +139,15 @@
           <div class="container p-5 my-5 border">
             <div class="row">
               <div class="col">
-                <p>{{todo.id}} | {{todo.title}} | 
+                <p>{{todo.id}} | {{todo.title}} |
                   <span class="badge badge-info">{{todo.category}}</span> |
-                  
+
                   {% if todo.complete == False %}
                   <span class="badge badge-secondary">Not Complete</span>
                   {% else %}
                   <span class="badge badge-success">Completed</span>
-                  {% endif %} | 
-                  
+                  {% endif %} |
+
                   {% if todo.date >= today_date%}
                   <span>{{todo.date}}</span>
                   {% else %}
