@@ -41,12 +41,13 @@ def verify_password(username, password):
 """Routes for Customers TODO app functionality include add, modify and delete functions"""
 
 @app.route("/todo")
+@app.route("/todo/<string:value>")
 @auth.login_required
-def todo():
+def todo(value = 'id'):
     # today's date
     today_date = date.today()
     username = users
-    todo_list=Todo.query.all()
+    todo_list=Todo.query.order_by(getattr(Todo, value)).all()
     print(todo_list)
     return render_template("todo.html", username=username, todo_list=todo_list, today_date=today_date)
 
