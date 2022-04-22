@@ -1,5 +1,4 @@
 from datetime import date
-from unicodedata import category 
 from flask import Flask, render_template, request, redirect, url_for
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
