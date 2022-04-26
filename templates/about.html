@@ -4,18 +4,37 @@
 
 {% block main %}
 
-<div class="container">
+<div class="container mt-3">
+  <h1>Features</h1>
+  <hr>
+  <div class="container d-flex justify-content-center">
 
-  <div class="row">
-    <div class="mt-5 col">
-      <h1>Welcome on Customer's Task System</h1>
-      <hr>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non assumenda cum eveniet tenetur totam, 
-        quae officia iste aperiam modi tempora corrupti facilis nostrum labore hic ipsa quo debitis. Nam, distinctio.
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa, minima esse? Necessitatibus adipisci accusamus aspernatur quod repudiandae,
-       quaerat vel nisi sit quisquam hic excepturi perspiciatis soluta inventore fugit cum quidem.</p>
-    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card" style="width: 50rem;">
+          <img src="{{url_for('static', filename='img/mainpanel.png')}}" class="card-img-top"
+            alt="view of the main panel">
+          <div class="card-body">
+            <h5 class="card-title">Customizable main panel</h5>
+            <p class="card-text">Main panel for adding TODOs for your list with fully useful and customizable components
+              like: Title, Description, Due date and category radios</p>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col mt-5">
+        <div class="card" style="width: 50rem;">
+          <img src="{{url_for('static', filename='img/sortandfilter.png')}}" class="card-img-top"
+            alt="view of the main panel">
+          <div class="card-body">
+            <h5 class="card-title">Sorting and Filtering buttons</h5>
+            <p class="card-text">Sort and filter your tasks in TODO list easly. All because of this two buttons!</p>
+          </div>
+        </div>
+      </div>
+
   </div>
-</div>
+  
+  </div>
 
-{% endblock %}
+  {% endblock %}
