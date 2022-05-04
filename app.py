@@ -7,8 +7,8 @@ import os
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Lolek1200!@localHost:5432/todo'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Lolek1200!@localHost:5432/todo'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -79,15 +79,15 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for('todo'))
 
-@app.route("/filter/<string:value>/<string:sort>")
-def filter(value, sort='date'):
+@app.route("/filter/<string:value>")
+def filter(value):
     today_date = date.today()
     username = users
-    todo_list=Todo.query.filter(Todo.category == value).order_by(getattr(Todo, sort)).all()
+    todo_list=Todo.query.filter(Todo.category == value).order_by(getattr(Todo, 'date')).all()
     print(todo_list)
     return render_template("todo.html", username=username, todo_list=todo_list, today_date=today_date)
 
 if __name__ == "__main__":
     db.create_all()
     port = os.environ.get("PORT", 5000)
-    app.run(debug=False, host='0.0.0.0', port=port)
+    app.run(debug=True, host='0.0.0.0', port=port)
