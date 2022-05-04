@@ -79,11 +79,11 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for('todo'))
 
-@app.route("/filter/<string:value>")
-def filter(value):
+@app.route("/filter/<string:value>/<string:sort>")
+def filter(value, sort='date'):
     today_date = date.today()
     username = users
-    todo_list=Todo.query.filter_by(category = value).all()
+    todo_list=Todo.query.filter(Todo.category == value).order_by(getattr(Todo, sort)).all()
     print(todo_list)
     return render_template("todo.html", username=username, todo_list=todo_list, today_date=today_date)
 
