@@ -47,7 +47,7 @@ def todo(value = 'id'):
     # today's date
     today_date = date.today()
     username = users
-    todo_list=Todo.query.order_by(getattr(Todo, value)).all()
+    todo_list=Todo.query.order_by(Todo.complete, getattr(Todo, value)).all()
     print(todo_list)
     return render_template("todo.html", username=username, todo_list=todo_list, today_date=today_date)
 
@@ -83,7 +83,7 @@ def delete(todo_id):
 def filter(value):
     today_date = date.today()
     username = users
-    todo_list=Todo.query.filter(Todo.category == value).order_by(getattr(Todo, 'date')).all()
+    todo_list=Todo.query.filter(Todo.category == value).order_by(Todo.complete, getattr(Todo, 'date')).all()
     print(todo_list)
     return render_template("todo.html", username=username, todo_list=todo_list, today_date=today_date)
 
